@@ -29,7 +29,6 @@
     "grunt-contrib-jshint": "~0.7.0",
     "grunt-contrib-imagemin": "~0.3.0",
     "grunt-webfont": "~0.2.0",
-    "grunt-usemin": "~2.0.1",
     "grunt-processhtml": "~0.2.5"
   }
 }

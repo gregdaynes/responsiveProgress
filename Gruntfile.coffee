@@ -4,46 +4,46 @@ module.exports = (grunt) ->
     # !General Filesystem
 	  shell:
 	    build:
-        command: 'rm -rf _dev _dist _tmp'
+        command: 'rm -rf dev dist .tmp'
 
     copy:
       css:
         expand: true
-        cwd: '_tmp/css/'
+        cwd: '.tmp/css/'
         src: ['**/*.css', '**/*.map', '!min/**/*.*']
-        dest: '_dev/'
-      css_dist:
+        dest: 'dev/'
+      cssdist:
         expand: true
-        cwd: '_tmp/css-min/'
+        cwd: '.tmp/css-min/'
         src: '**/*.css'
-        dest: '_dist/'
+        dest: 'dist/'
       js:
         expand: true
-        cwd: '_tmp/js/'
+        cwd: '.tmp/js/'
         src: '**/*.*'
-        dest: '_dev/'
+        dest: 'dev/'
       js_raw:
         expand: true
-        cwd: 'assets/js/'
+        cwd: 'src/js/'
         src: '**/*.js'
-        dest: '_dev/'
-      html_dev:
+        dest: 'dev/'
+      htmldev:
         expand: true
         cwd: ''
         src: '*.html'
-        dest: '_dev/'
-      html_dist:
+        dest: 'dev/'
+      htmldist:
         expand: true
         cwd: ''
         src: '*.html'
-        dest: '_dist/'
+        dest: 'dist/'
 
     processhtml:
       dist:
         options:
           process: true
         files:
-          '_dist/index.html': 'index.html'
+          'dist/index.html': 'src/index.html'
 
 
     # !CSS Workflow
@@ -54,8 +54,8 @@ module.exports = (grunt) ->
       build:
         files: [{
           expand: true,
-          cwd: 'assets/css/',
-          dest: '_tmp/css/',
+          cwd: 'src/css/',
+          dest: '.tmp/css/',
           src: ['**/*.scss'],
           ext: '.css',
         }]
@@ -66,14 +66,14 @@ module.exports = (grunt) ->
       build:
         expand: true
         flatten: true
-        cwd: '_tmp/css/'
+        cwd: '.tmp/css/'
         src: '**/*.css'
-        dest: '_tmp/css/'
+        dest: '.tmp/css/'
 
     csslint:
       build:
         expand: true
-        cwd: '_tmp/css'
+        cwd: '.tmp/css'
         src: '**/*.css'
 
     cssmin:
@@ -83,9 +83,9 @@ module.exports = (grunt) ->
           keepSpecialComments: 1
         files: [{
           expand: true
-          cwd: '_tmp/css/'
+          cwd: '.tmp/css/'
           src: '**/*.css'
-          dest: '_tmp/css-min/'
+          dest: '.tmp/css-min/'
           ext: '.css'
         }]
 
@@ -98,9 +98,9 @@ module.exports = (grunt) ->
       build:
         expand: true
         flatten: true
-        cwd: 'assets/js'
+        cwd: 'src/js'
         src: '**/*.coffee'
-        dest: '_tmp/js/'
+        dest: '.tmp/js/'
         ext: '.js'
 
     uglify:
@@ -114,9 +114,9 @@ module.exports = (grunt) ->
       build:
         expand: true
         # flatten: true
-        cwd: '_tmp/js/'
+        cwd: '.tmp/js/'
         src: '*.js'
-        dest: '_dist/'
+        dest: 'dist/'
 
 
     # !Connect
@@ -124,24 +124,24 @@ module.exports = (grunt) ->
       build:
         options:
           port: 4000
-          base: '_dev'
+          base: 'dev'
           livereload: true
       dist:
         options:
           port: 5000
-          base: '_dist'
+          base: 'dist'
           livereload: true
 
     # !Watch
     watch:
       coffee:
-        files: 'assets/js/**/*.coffee'
+        files: 'src/js/**/*.coffee'
         tasks: 'js'
       js:
-        files: 'assets/js/**/*.js'
+        files: 'src/js/**/*.js'
         tasks: ['copy:js_raw', 'js']
       sass:
-        files: 'assets/css/**/*.scss'
+        files: 'src/css/**/*.scss'
         tasks: 'css'
       html:
         files: '*.html'
@@ -149,7 +149,7 @@ module.exports = (grunt) ->
       livereload:
         options:
           livereload: true
-        files: ['_dev/**/*']
+        files: ['dev/**/*']
 
 
     # !Load Tasks
@@ -169,6 +169,6 @@ module.exports = (grunt) ->
     grunt.registerTask 'default', ['shell', 'css', 'js', 'html', 'connect', 'watch']
 
     grunt.registerTask 'css', ['sass', 'autoprefixer', 'csslint', 'cssmin', 'copy_css']
-    grunt.registerTask 'copy_css', ['copy:css', 'copy:css_dist']
+    grunt.registerTask 'copy_css', ['copy:css', 'copy:cssdist']
     grunt.registerTask 'js', ['coffee', 'uglify', 'copy:js', 'copy:js_raw']
-    grunt.registerTask 'html', ['copy:html_dev', 'processhtml']
+    grunt.registerTask 'html', ['copy:htmldev', 'processhtml']

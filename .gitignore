@@ -7,3 +7,5 @@ _build
 tmp
 *.sketch*
 *.map
+.tmp
+dev/*
