@@ -1,0 +1,9 @@
+_build/
+.DS_Store
+*.sass-cache
+node_modules
+_tmp
+_build
+tmp
+*.sketch*
+*.map
