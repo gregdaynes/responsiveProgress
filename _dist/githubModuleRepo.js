@@ -1,1 +1,4 @@
-(function(){var a,b,c;b=document.getElementsByClassName("carousel__radio-control"),a=0,c=null}).call(this);
+/*!
+  Sticky Comment
+*/
+(function(){}).call(this);

@@ -22,6 +22,11 @@ module.exports = (grunt) ->
         cwd: '_tmp/js/'
         src: '**/*.*'
         dest: '_dev/'
+      js_raw:
+        expand: true
+        cwd: 'assets/js/'
+        src: '**/*.js'
+        dest: '_dev/'
       html_dev:
         expand: true
         cwd: ''
@@ -32,6 +37,13 @@ module.exports = (grunt) ->
         cwd: ''
         src: '*.html'
         dest: '_dist/'
+
+    processhtml:
+      dist:
+        options:
+          process: true
+        files:
+          '_dist/index.html': 'index.html'
 
 
     # !CSS Workflow
@@ -82,6 +94,7 @@ module.exports = (grunt) ->
     coffee:
       options:
         sourceMap: true
+        bare: false
       build:
         expand: true
         flatten: true
@@ -92,6 +105,7 @@ module.exports = (grunt) ->
 
     uglify:
       options:
+        preserveComments: 'some'
         report: 'gzip'
         compress:
           global_defs:
@@ -123,11 +137,14 @@ module.exports = (grunt) ->
       coffee:
         files: 'assets/js/**/*.coffee'
         tasks: 'js'
+      js:
+        files: 'assets/js/**/*.js'
+        tasks: ['copy:js_raw', 'js']
       sass:
         files: 'assets/css/**/*.scss'
         tasks: 'css'
       html:
-        files: '/*.html'
+        files: '*.html'
         tasks: 'html'
       livereload:
         options:
@@ -146,11 +163,12 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-contrib-uglify'
     grunt.loadNpmTasks 'grunt-contrib-watch'
     grunt.loadNpmTasks 'grunt-shell'
+    grunt.loadNpmTasks 'grunt-processhtml'
 
     # !Register Tasks
     grunt.registerTask 'default', ['shell', 'css', 'js', 'html', 'connect', 'watch']
 
     grunt.registerTask 'css', ['sass', 'autoprefixer', 'csslint', 'cssmin', 'copy_css']
     grunt.registerTask 'copy_css', ['copy:css', 'copy:css_dist']
-    grunt.registerTask 'js', ['coffee', 'uglify', 'copy:js']
-    grunt.registerTask 'html', ['copy:html_dev', 'copy:html_dist']
+    grunt.registerTask 'js', ['coffee', 'uglify', 'copy:js', 'copy:js_raw']
+    grunt.registerTask 'html', ['copy:html_dev', 'processhtml']
