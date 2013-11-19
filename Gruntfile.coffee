@@ -27,16 +27,32 @@ module.exports = (grunt) ->
         cwd: 'src/js/'
         src: '**/*.js'
         dest: 'dev/'
+      js_src_coffee:
+        expand: true
+        cwd: 'src/js/'
+        src: '**/*.coffee'
+        dest: 'dev/src/js/'
       htmldev:
         expand: true
+        flatten: true
         cwd: ''
-        src: '*.html'
+        src: 'src/*.html'
         dest: 'dev/'
       htmldist:
         expand: true
         cwd: ''
         src: '*.html'
         dest: 'dist/'
+      media_dev:
+        expand: true
+        cwd: 'src/media/'
+        src: '**/*.*'
+        dest: 'dev/media/'
+      media_dist:
+        expand: true
+        cwd: 'src/media/'
+        src: '**/*.*'
+        dest: 'dist/media/'
 
     processhtml:
       dist:
@@ -56,7 +72,7 @@ module.exports = (grunt) ->
           expand: true,
           cwd: 'src/css/',
           dest: '.tmp/css/',
-          src: ['**/*.scss'],
+          src: ['**/*.scss', '!_*.scss', '!modules/**/*.scss']
           ext: '.css',
         }]
 
@@ -144,7 +160,7 @@ module.exports = (grunt) ->
         files: 'src/css/**/*.scss'
         tasks: 'css'
       html:
-        files: '*.html'
+        files: 'src/*.html'
         tasks: 'html'
       livereload:
         options:
@@ -166,9 +182,10 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-processhtml'
 
     # !Register Tasks
-    grunt.registerTask 'default', ['shell', 'css', 'js', 'html', 'connect', 'watch']
+    grunt.registerTask 'default', ['shell', 'css', 'js', 'media', 'html', 'connect', 'watch']
 
-    grunt.registerTask 'css', ['sass', 'autoprefixer', 'csslint', 'cssmin', 'copy_css']
+    grunt.registerTask 'css', ['sass', 'autoprefixer', 'cssmin', 'copy_css']
     grunt.registerTask 'copy_css', ['copy:css', 'copy:cssdist']
-    grunt.registerTask 'js', ['coffee', 'uglify', 'copy:js', 'copy:js_raw']
+    grunt.registerTask 'js', ['coffee', 'uglify', 'copy:js', 'copy:js_raw', 'copy:js_src_coffee']
+    grunt.registerTask 'media', ['copy:media_dev', 'copy:media_dist']
     grunt.registerTask 'html', ['copy:htmldev', 'processhtml']
