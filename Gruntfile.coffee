@@ -14,7 +14,7 @@ module.exports = (grunt) ->
         dest: 'dev/'
       cssdist:
         expand: true
-        cwd: '.tmp/css-min/'
+        cwd: '.tmp/css/'
         src: '**/*.css'
         dest: 'dist/'
       js:
@@ -72,7 +72,7 @@ module.exports = (grunt) ->
           expand: true,
           cwd: 'src/css/',
           dest: '.tmp/css/',
-          src: ['**/*.scss', '!_*.scss', '!modules/**/*.scss']
+          src: ['**/*.scss', '!_*.scss', '!modules/**/*.scss', '!blocks/**/*.scss', '!pages/**/*.scss']
           ext: '.css',
         }]
 
@@ -92,6 +92,10 @@ module.exports = (grunt) ->
         cwd: '.tmp/css'
         src: '**/*.css'
 
+    uncss:
+      build:
+        files: 'dist/githubModuleRepo.css': 'dist/index.html'
+
     cssmin:
       build:
         options:
@@ -99,9 +103,9 @@ module.exports = (grunt) ->
           keepSpecialComments: 1
         files: [{
           expand: true
-          cwd: '.tmp/css/'
+          cwd: 'dist/'
           src: '**/*.css'
-          dest: '.tmp/css-min/'
+          dest: 'dist/'
           ext: '.css'
         }]
 
@@ -180,11 +184,12 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-contrib-watch'
     grunt.loadNpmTasks 'grunt-shell'
     grunt.loadNpmTasks 'grunt-processhtml'
+    grunt.loadNpmTasks 'grunt-uncss'
 
     # !Register Tasks
-    grunt.registerTask 'default', ['shell', 'css', 'js', 'media', 'html', 'connect', 'watch']
+    grunt.registerTask 'default', ['shell', 'media', 'html', 'css', 'js', 'connect', 'watch']
 
-    grunt.registerTask 'css', ['sass', 'autoprefixer', 'cssmin', 'copy_css']
+    grunt.registerTask 'css', ['sass', 'autoprefixer', 'copy_css', 'uncss','cssmin']
     grunt.registerTask 'copy_css', ['copy:css', 'copy:cssdist']
     grunt.registerTask 'js', ['coffee', 'uglify', 'copy:js', 'copy:js_raw', 'copy:js_src_coffee']
     grunt.registerTask 'media', ['copy:media_dev', 'copy:media_dist']
