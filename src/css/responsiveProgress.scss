@@ -1,0 +1,144 @@
+/*! ------------------------------------------------------------------------ !*\
+    Created By: Gregory Daynes
+\*! ------------------------------------------------------------------------ !*/
+
+
+// !Imports
+// --------
+
+// Tools
+@import "_utilities";
+@import "_functions";
+@import "_variables";
+@import "_extends";
+@import "_mixins";
+@import "_grid";
+@import "_normalize";
+
+// Styles
+@import "base";
+
+
+a {
+  text-decoration: none;
+  font-family: verdana;
+  font-size: 14px;
+  color: white;
+}
+
+
+
+
+.bc2 {
+  @extend %list-style-none;
+  line-height: 36px;
+  overflow: hidden;
+  width: 100%;
+  counter-reset: flag;
+  border: 1px solid white;
+  box-sizing: border-box;
+/*   background-color: #bbb; */
+}
+
+.bc2 li {
+  width: 1%;
+  white-space: nowrap;
+  display: table-cell;
+  text-align: center;
+  position: relative;
+}
+
+.bc2 li a {
+  background-color: #bbb;
+  display: block;
+  padding: 0 18px 0 27px;
+  color: transparent;
+  font-size: 0;
+
+}
+
+.bc2 li a:after {
+  border: 2px solid white;
+  border-left: 0;
+  border-bottom: 0;
+  float: right;
+  content: '';
+  width: 36px;
+  height: 36px;
+  display: block;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 0;
+  left: 100%;
+  border-radius: 0 0 0 100%;
+  z-index: 1;
+  background-color: #bbb;
+  margin-left: -24px;
+}
+
+.bc2 li a:before {
+  content: counter(flag);
+	counter-increment: flag;
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: block;
+  float: left;
+  position: relative;
+	line-height: 14px;
+	font-size: 11px;
+	color: white;
+	box-sizing: border-box;
+	font-weight: bold;
+	top: 9px;
+}
+
+.bc2 li:last-child a:after {
+  display: none;
+}
+
+
+
+.bc2 li:hover a,
+.bc2 li:hover a:after {
+  background-color: orange;
+}
+
+
+li.complete a,
+li.complete a:after {
+  background-color: green;
+}
+
+li.complete a:before {
+  content: '\2713';
+}
+
+li.error a,
+li.error a:after {
+  background-color: red;
+}
+
+li.error a:before {
+  content: '\2A2F';
+  font-size: 24px;
+  line-height: 3px;
+}
+
+li.progress a,
+li.progress a:after {
+  background-color: lightblue;
+}
+
+
+@include breakpoint($bp3, min-width) {
+  .bc2 li a {
+    color: white;
+    font-size: 14px;
+  }
+}
+
+
+
+@include bp-helper;

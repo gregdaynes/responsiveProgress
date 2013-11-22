@@ -1,0 +1,287 @@
+
+
+
+
+
+@mixin font-size($font-size: 16, $line-height: 1.6) {
+  /*--------------------*\
+    rem for browsers with support
+    px for ones without
+
+    @include font-size(integer)
+    // font-size: #{$font-size / 10}rem;
+  \*--------------------*/
+  font-size: #{$font-size};
+
+
+  @if $line-height {
+    line-height: $line-height;
+  }
+
+}
+
+
+
+
+
+@mixin hyphens($val:auto) {
+  /*--------------------*\
+    Malarky/Rock-Hammer
+    how to go about splitting words to improve the layout of text when
+    line-wrapping
+    https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens
+
+    @include css-hyphens( none | manual | auto)
+  \*--------------------*/
+  hyphens: $val;
+}
+
+
+
+
+
+@mixin hide($type) {
+  /*--------------------*\
+    based on Malarky/Rock-Hammer
+    hide elements based on requirement
+
+    @include hide(option)
+  \*--------------------*/
+
+  @if $type == hide-block
+  {
+    display: none !important;
+    visibility: hidden;
+  }
+
+  @if $type == hide-text
+  {
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  @if $type == hide-content
+  {
+    visibility: hidden;
+  }
+
+  @if $type == hide-image
+  {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+
+    &:before {
+      content: "";
+      display: block;
+      width: 0;
+      height: 150%;
+    }
+  }
+
+  @if $type == image-replacement
+  {
+    text-indent: 100%;
+  	white-space: nowrap;
+  	overflow: hidden;
+  }
+
+  @if $type == off-screen
+  {
+    visibility: hidden;
+    height: 0;
+    margin: 0;
+  }
+}
+
+
+
+
+@mixin linear-gradient($start, $stop)
+{
+  /*--------------------*\
+    CSS3 Please
+
+    @include linear-gradient(#000, #fff);
+  \*--------------------*/
+  background-color: $start;
+  background-image: linear-gradient(to bottom, $start, $stop);
+}
+
+
+
+
+
+@mixin box-shadow($shadow: 0 1px 3px rgba(0,0,0,.25)) {
+  /*--------------------*\
+    Malarky/Rock-Hammer
+
+    @include box-shadow(horizontal vertical blur color)
+  \*--------------------*/
+  box-shadow: $shadow;
+}
+
+
+
+
+
+@mixin drop-shadow($shadow: 0 1px 3px rgba(0,0,0,.25))
+{
+  /*--------------------*\
+    Malarky/Rock-Hammer
+
+    @include drop-shadow(horizontal vertical blur color)
+  \*--------------------*/
+  drop-shadow: $shadow;
+}
+
+
+
+
+
+@mixin opacity($opacity: .5)
+{
+  /*--------------------*\
+    Malarky/Rock-Hammer
+
+    @include opacity(integer)
+  \*--------------------*/
+  opacity: $opacity;
+}
+
+
+
+
+
+@mixin background-size($size)
+{
+  /*--------------------*\
+    Malarky/Rock-Hammer
+
+    @include background-size( auto | % | px )
+  \*--------------------*/
+  background-size: $size;
+}
+
+
+
+
+
+@mixin background-clip($clip)
+{
+  /*--------------------*\
+    Malarky/Rock-Hammer
+
+    @include background-clip( border-box | padding-box | content-box )
+  \*--------------------*/
+  background-clip: $clip;
+}
+
+
+
+
+
+@mixin breakpoint($unit, $query: min, $target: "")
+{
+  /*--------------------*\
+    Malarky/Rock-Hammer
+
+    @include breakpoint(UNIT, QUERY PART LEFT, QUERY PART RIGHT, TARGET)
+  \*--------------------*/
+	@if $target != "" {
+		@media #{$target} and (#{$query}: #{$unit}) {
+			@content;
+		}
+	}
+	@else {
+		@media (#{$query}: #{$unit}) {
+			@content;
+		}
+	}
+}
+
+
+
+
+
+@mixin aspect-ratio($ratio, $content-class) {
+  /*--------------------*\
+    create block elements that follow ratio
+
+     @include aspect-ratio(16/9, class)
+  \*--------------------*/
+  position: relative;
+  // width: 50% // provided by normal css
+
+  &:before {
+    content: "";
+    display: block;
+    padding-top: ($ratio) * 100%;
+  }
+
+  .#{$content-class} {
+  	position:  absolute;
+  	top: 0;
+  	left: 0;
+  	bottom: 0;
+  	right: 0;
+  }
+}
+
+@mixin proportional($width) {
+  width: $width;
+  padding-bottom: $width;
+  height: 0;
+  @extend %box-sizing;
+}
+
+
+
+
+
+@mixin bp-helper {
+  /*--------------------*\
+    add box to screen displaying current breakpoint
+  \*--------------------*/
+  body:after {
+    content: 'no-bp';
+    display: block;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    opacity: 0.3;
+
+    @include breakpoint($bp1, max-width) {
+      content: 'bp1';
+    }
+
+    @include breakpoint($bp2, min-width) {
+      content: 'bp2';
+    }
+
+    @include breakpoint($bp3, min-width) {
+      content: 'bp3';
+    }
+
+    @include breakpoint($bp4, min-width) {
+      content: 'bp4';
+    }
+
+    @include breakpoint($bp5, min-width) {
+      content: 'bp5';
+    }
+
+    @include breakpoint($bp6, min-width) {
+      content: 'bp6';
+    }
+  }
+}
+
+
+@mixin line($background-color: $white, $width: 100%, $height: 3px) {
+  background-color: $background-color;
+  display: inline-block;
+  width: $width;
+  height: $height;
+}

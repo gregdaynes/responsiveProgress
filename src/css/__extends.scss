@@ -1,0 +1,124 @@
+
+
+
+
+
+%text-overflow {
+  /*--------------------*\
+    Malarky/Rock-Hammer
+
+    @extend %text-overflow
+  \*--------------------*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+
+
+
+%zero {
+  /*--------------------*\
+    Malarky/Rock-Hammer
+
+    zero out margin and padding
+
+    @extend %zero
+  \*--------------------*/
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+
+%clearfix {
+  /*--------------------*\
+    For modern browsers
+    1. The space content is one way to avoid an Opera bug when the
+       `contenteditable` attribute is included anywhere else in the document.
+       Otherwise it causes space to appear at the top and bottom of elements
+       that receive the `clearfix` class.
+    2. The use of `table` rather than `block` is only necessary if using
+       `:before` to contain the top-margins of child elements.
+  \*--------------------*/
+  &:before,
+  &:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+// testing
+
+%list-style-none {
+  /*--------------------*\
+    @extend %list-style-none
+  \*--------------------*/
+
+  @extend %zero;
+  list-style: none;
+}
+
+
+
+%box-sizing {
+  /*--------------------*\
+    CSS3Please.com + Everyone
+
+    @extend %box-sizing
+  \*--------------------*/
+  box-sizing: border-box; /* Chrome, IE 8+, Opera, Safari 5.1 */
+}
+
+
+
+
+
+%hide-screen {
+  /*--------------------*\
+    @extend %hide-screen
+  \*--------------------*/
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  clip: rect(0 0 0 0);
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  display: block;
+}
+
+%absolute-block {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+
+
+
+%transition {
+  transition: all $transitionSpeed;
+}
+
+
+%full-width {
+  width: 100%;
+}
+
+
+
+%word-break {
+  -epub-word-break: break-all;
+  -ms-word-break: break-all;
+  word-break: break-all;
+}

@@ -1,0 +1,64 @@
+/*--------------------*\
+  Breakpoints
+\*--------------------*/
+$bp1: em(479px);
+$bp2: em(480px);
+$bp3: em(600px);
+$bp4: em(768px);
+$bp5: em(992px);
+$bp6: em(1207px);
+$bp7: em(1382px);
+
+/*--------------------*\
+  Grid
+\*--------------------*/
+$horizontal-gutter: 24px!default;
+$vertical-gutter:   24px!default;
+/*--------------------*\
+  Nav options
+\*--------------------*/
+$navMenuWidth: 90%;
+$transitionSpeed: .3s;
+
+
+/*--------------------*\
+  Font Sizes
+\*--------------------*/
+$small: 0.667em;
+$h6   : 0.75em;
+$h5   : 0.83em;
+$base : 1em;
+$h4   : 1em;
+$h3   : 1.17em;
+$h2   : 1.75em;
+$h1   : 2em;
+
+/*--------------------*\
+  Colors
+\*--------------------*/
+$primarycolor 					: #1f978c;
+$secondarycolor 				: #1c2d5a;
+
+$neutralcolor 					: #cccccc;
+$darkneutralcolor 			: darken($neutralcolor,30%);
+$lightneutralcolor 			: lighten($neutralcolor, 10%);
+
+$black 							    : #000;
+$white 							    : #fff;
+
+$textcolor              : #000;
+$fadedtextcolor         : rgba(0,0,0,0.5);
+
+$tapcolor               : transparentize($primarycolor, .7);
+$selectioncolor         : transparentize($primarycolor, .7);
+$inactiveselectioncolor : transparentize($black, .85);
+
+$linkcolor 		    			: $primarycolor;
+$linkcolorhover 				: $primarycolor;
+$linkcolorvisited   		: $secondarycolor;
+
+$alertcolor 					: #e67e22;
+$errorcolor 					: #e74c3c;
+$infocolor 						: #f1c40f;
+$successcolor 				: #2ecc71;
+$warningcolor 				: #e67e22;

@@ -1,0 +1,140 @@
+
+
+.theme {
+  .breakpoints {
+    position:fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    @extend %box-sizing;
+
+    div {
+      height: 100%;
+      border-right: 1px dotted rgba(0,0,0,0.4);
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      text-align: right;
+
+
+      &.bp1 {
+        width: $bp1 - em(40px);
+        padding-right: 40px;
+      }
+      &.bp2 {
+        width: $bp2;
+      }
+      &.bp3 {
+        width: $bp3;
+      }
+      &.bp4 {
+        width: $bp4;
+      }
+      &.bp5 {
+        width: $bp5;
+      }
+      &.bp6 {
+        width: $bp6;
+      }
+    }
+  }
+
+
+
+  .colors {
+    div {
+      width: 100px;
+      height: 100px;
+      display: inline-block;
+      text-align: center;
+      line-height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .duo-palette {
+      position: relative;
+      width: 150px;
+      border-radius: 0;
+      border: none;
+
+      div { position: absolute; }
+      .primary { left: 0; background: $primarycolor; }
+      .secondary { right: 0; background: $secondarycolor }
+    }
+
+    .trio-palette {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      border-radius: 0;
+      border: none;
+
+      div { position: absolute; }
+      .neutral { left: 0; background: $neutralcolor }
+      .darkneutral { right: 0; background: $darkneutralcolor }
+      .lightneutral { bottom: 0; left: 50%; margin-left: -50px; background: $lightneutralcolor}
+    }
+
+    .black {
+      background: $black;
+      color: $white;
+    }
+
+    .white {
+      background: $white;
+      color: $black;
+    }
+
+    .alert {
+      background: $alertcolor;
+      color: $white;
+    }
+
+    .error {
+      background: $errorcolor;
+      color: $white;
+    }
+
+    .info {
+      background: $infocolor;
+    }
+
+    .success {
+      background: $successcolor;
+    }
+
+    .warning {
+      background: $warningcolor;
+      color: $white;
+    }
+
+    .text {
+      color: $textcolor;
+    }
+
+    .fadedtext {
+      color: $fadedtextcolor;
+    }
+
+    .tap {
+      background: $tapcolor;
+    }
+
+    .selection {
+      background: $selectioncolor;
+    }
+
+    .inactiveselect {
+      background: $inactiveselectioncolor;
+    }
+
+    a {
+      &.link { color: $linkcolor; }
+      &.linkhover { color: $linkcolorhover; }
+      &.linkvisited { color: $linkcolorvisited; }
+    }
+  }
+}

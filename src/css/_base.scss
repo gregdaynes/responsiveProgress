@@ -1,0 +1,188 @@
+/* Set <html> and <body> to inherit the height of the viewport */
+html,
+body {
+	min-height: 100%;
+}
+
+/**
+ * NOTE: Use `text-rendering` with caution - http://cbrac.co/SJt8p1
+ * NOTE: Avoid the webkit anti-aliasing trap - http://cbrac.co/TAdhbH
+ * 1. Force a vertical scrollbar - http://cbrac.co/163MspB
+ * 2. Remove iOS text size adjust without disabling user zoom
+ */
+html {
+	overflow-y: scroll; /* 1 */
+	font-family: sans-serif; /* 1 */
+	background-color: $neutralcolor;
+	@include font-size(100%, 1.5);
+}
+
+/**
+ * 1. Inherits percentage declared on above <html> as the root `font-size`
+ * 2. Unitless `line-height`, which acts as a multiple of the root `font-size`
+ */
+body {
+  @extend %zero;
+  -webkit-tap-highlight-color: $tapcolor;
+  background-color: $white;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+::selection {
+    background: $selectioncolor;
+    text-shadow: none;
+}
+
+/* Change `background` for text selections when browser is unfocused */
+::selection:window-inactive {
+	background: $inactiveselectioncolor;
+}
+
+/* Remove `background` on images when selected */
+img::selection {
+	background: transparent;
+}
+
+a {
+  // a[href$=".mp3"] {} attribute type selector
+}
+
+/* Define a mobile tap highlight color (iOS 1.1.1+) */
+a:link {
+	-webkit-tap-highlight-color: $tapcolor;
+}
+
+
+/*
+ * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+ * 1. Remove border when inside `a` element in IE 8/9.
+ */
+img {
+  vertical-align: middle;
+  @extend %full-width;
+  border: 0; /* 1 */
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+fieldset {
+  border: 0;
+  @extend %zero;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ * 1. Remove default vertical scrollbar in IE 8/9.
+ * 2. Improve readability and alignment in all browsers.
+ */
+textarea {
+  resize: vertical;
+  overflow: auto; /* 1 */
+  vertical-align: top; /* 2 */
+
+}
+
+/* Fluid-width <audio> elements */
+audio {
+	@extend %full-width;
+}
+
+/* Fluid-width media that maintain their aspect ratios */
+img,
+video {
+	max-width: 100%;
+	width: auto;
+	height: auto !important;
+}
+
+
+// Basic typography
+abbr,
+acronym,
+dfn[title] {
+	cursor: help;
+}
+
+acronym {
+	text-transform: uppercase;
+}
+
+details {
+	cursor: pointer;
+}
+
+abbr a {
+	text-decoration: none;
+}
+
+h1 { @include font-size($h1); }
+h2 { @include font-size($h2); }
+h3 { @include font-size($h3); }
+h4 { @include font-size($h4); }
+h5 { @include font-size($h5); }
+h6 { @include font-size($h6); }
+p  { @include font-size($base, 1.5); }
+small { @include font-size($small); }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+  font-weight: 200;
+}
+
+body,
+input,
+button {
+  -webkit-font-smoothing: antialiased;
+}
+
+p {
+  padding: 0;
+  margin-top: 0;
+}
+
+/* Nested `list-style` types for ordered lists */
+ol          { list-style: decimal; }
+ol ol       { list-style: upper-alpha; }
+ol ol ol    { list-style: lower-roman; }
+ol ol ol ol { list-style: lower-alpha; }
+
+p,
+table,
+textarea,
+td,
+th {
+	@include hyphens(auto);
+  @extend %word-break;
+}
+
+strong {
+  font-weight: 800;
+}
+
+em {
+  font-style: italic;
+}
+
+blockquote {
+  margin: 0 0 1em ($horizontal-gutter / 2);
+  font-style: italic;
+  color: $secondarycolor;
+}
+
+blockquote p {
+  border-left: 3px solid $secondarycolor;
+  padding-bottom: 0;
+}
