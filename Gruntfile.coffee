@@ -94,7 +94,7 @@ module.exports = (grunt) ->
 
     uncss:
       build:
-        files: 'dist/githubModuleRepo.css': 'dist/index.html'
+        files: 'dist/responsiveProgress.css': 'dist/index.html'
 
     cssmin:
       build:
@@ -190,6 +190,7 @@ module.exports = (grunt) ->
     grunt.registerTask 'default', ['shell', 'media', 'html', 'css', 'js', 'connect', 'watch']
 
     grunt.registerTask 'css', ['sass', 'autoprefixer', 'copy_css', 'uncss','cssmin']
+    grunt.registerTask 'cssDev', ['sass', 'autoprefixer', 'copy_css', 'cssmin']
     grunt.registerTask 'copy_css', ['copy:css', 'copy:cssdist']
     grunt.registerTask 'js', ['coffee', 'uglify', 'copy:js', 'copy:js_raw', 'copy:js_src_coffee']
     grunt.registerTask 'media', ['copy:media_dev', 'copy:media_dist']
